@@ -1,0 +1,40 @@
+C²-SANet: Training Configuration and Reproducibility
+
+Random Seed
+
+To ensure reproducibility, all experiments were conducted using a fixed
+random seed.
+
+-   Seed: 42
+
+The seed was applied to: - Python random - NumPy - TensorFlow - GPU
+operations 
+
+------------------------------------------------------------------------
+Training Hyperparameters
+
+The following hyperparameter settings were explored during preliminary
+experiments on the validation set. The final configuration yielding the
+best validation performance was adopted for all experiments reported in
+the manuscript.
+
+Hyperparameter              Explored Values                 Final Value
+-------------------------   ------------------------------  -----------
+Optimizer                   Adam                            Adam
+Learning Rate               {1e-3, 5e-4, 1e-4}             1e-4
+Loss Function               MSE, MAE, PerpLoss             PerpLoss
+Beta_1 (β1)                 0.9                            0.9
+Beta_2 (β2)                 0.999                          0.999
+Number of Epochs            {50, 80, 100}                 100
+Batch Size                  4                    	  4
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+Notes
+
+-   The reported experimental results correspond to the above
+    hyperparameter settings.
+-   The validation set was used for model selection, and the final
+    performance was reported on the independent test set.
