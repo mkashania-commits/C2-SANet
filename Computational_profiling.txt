@@ -1,0 +1,53 @@
+# Computational Profiling
+
+## Profiling Configuration
+
+- Batch size: 1
+- FLOPs: Computed using the `keras-flops` package.
+- Latency: Mean inference time measured over 100 slices after a 10-slice warm-up.
+- Throughput: Computed as the reciprocal of the mean inference latency (slices/second).
+- CPU memory usage was measured using `psutil`.
+- GPU peak memory usage was measured using TensorFlow memory statistics.
+
+-------------------------------------------------------------------------------
+
+## Included in Latency Measurements
+
+The reported inference latency includes the complete forward pass of the proposed
+C²-SANet, including:
+
+- Convolutional layers
+- Complex-valued operations
+- Attention modules
+- FFT/IFFT operations implemented within the model
+- Data consistency operations implemented within the model
+- Activation functions and normalization layers
+- Skip connections and feature fusion operations
+- TensorFlow model execution (including implicit host-to-device transfer handled
+  by TensorFlow)
+
+-------------------------------------------------------------------------------
+
+
+## Throughput Measurement
+
+Throughput is reported in slices per second and was computed from the measured
+mean inference latency using a batch size of 1.
+
+-------------------------------------------------------------------------------
+
+## FLOPs and Parameter Count
+
+- Parameter count was obtained using TensorFlow/Keras `model.count_params()`.
+- FLOPs were computed using the `keras-flops` package for a batch size of 1.
+
+-------------------------------------------------------------------------------
+
+## Notes
+
+- All profiling experiments were performed after warm-up iterations to eliminate
+  initialization overhead.
+- FLOPs, latency, throughput, and memory usage were measured using the same
+  trained model employed for the quantitative results reported in the manuscript.
+- The same profiling methodology was applied consistently for both CPU and GPU
+  evaluations.
